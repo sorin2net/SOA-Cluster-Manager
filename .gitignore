@@ -1,0 +1,37 @@
+# Documentatie si instructiuni locale
+docs/
+
+# Secrete
+.env
+*.env
+infra/ssh_keys/
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# Baze de date locale
+*.sqlite
+*.sqlite3
+*.db
+mariadb_data/
+
+# Python
+*_pb2.py
+*_pb2_grpc.py
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Node.js
+node_modules/
+dist/
+build/
+
+# IDE / sistem de operare
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log

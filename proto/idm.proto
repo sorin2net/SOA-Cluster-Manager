@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package idm;
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ADMINISTRATOR = 1;
+  MAINTAINER = 2;
+}
+
+service IdentityService {
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc CreateAccount (CreateAccountRequest) returns (CreateAccountResponse);
+  rpc ActivateAccount (ActivateAccountRequest) returns (ActivateAccountResponse);
+  rpc ListAccounts (ListAccountsRequest) returns (ListAccountsResponse);
+  rpc DeactivateAccount (DeactivateAccountRequest) returns (DeactivateAccountResponse);
+  rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
+  rpc DestroyToken (DestroyTokenRequest) returns (DestroyTokenResponse);
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+}
+
+message CreateAccountRequest {
+  string token = 1;
+  string username = 2;
+  Role role = 3;
+}
+
+message CreateAccountResponse {
+  string uid = 1;
+}
+
+message ActivateAccountRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message ActivateAccountResponse {}
+
+message ListAccountsRequest {
+  string token = 1;
+}
+
+message Account {
+  string uid = 1;
+  string username = 2;
+  Role role = 3;
+  bool is_active = 4;
+}
+
+message ListAccountsResponse {
+  repeated Account accounts = 1;
+}
+
+message DeactivateAccountRequest {
+  string token = 1;
+  string username = 2;
+}
+
+message DeactivateAccountResponse {}
+
+message ValidateTokenRequest {
+  string token = 1;
+}
+
+message ValidateTokenResponse {
+  string sub = 1;
+  Role role = 2;
+}
+
+message DestroyTokenRequest {
+  string token = 1;
+}
+
+message DestroyTokenResponse {}
